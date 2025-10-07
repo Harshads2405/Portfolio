@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Harshad Nana Shinde, a passionate Software Developer specializing in Java Full Stack Development and AI & Data Science.">
+  <meta name="keywords" content="Java, Spring Boot, React, AI, Data Science, Web Development, Portfolio">
+  <title>Harshad Nana Shinde - Portfolio</title>
+  <link rel="icon" href="https://via.placeholder.com/32" type="image/png"> <!-- Replace with your favicon -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+    .skill-tag { font-family: 'Roboto Mono', monospace; }
+    .animate-slide-up { animation: slideUp 0.5s ease-out; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .profile-img, .logo-img { transition: transform 0.3s ease; }
+    .profile-img:hover, .logo-img:hover { transform: scale(1.05); }
+    .bg-pattern { background-image: linear-gradient(45deg, rgba(0,0,0,0.02) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.02) 75%, transparent 75%, transparent); background-size: 20px 20px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    // Main App Component with Dark Mode
+    const App = () => {
+      const [darkMode, setDarkMode] = useState(false);
+
+      const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        document.body.classList.toggle('dark', !darkMode);
+      };
+
+      return (
+        <div className={darkMode ? 'dark bg-gray-900 text-white' : 'bg-white text-gray-900'}>
+          <NavBar toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+          <Footer />
+        </div>
+      );
+    };
+
+    // Navigation Component with Logo
+    const NavBar = ({ toggleDarkMode, darkMode }) => (
+      <nav className="bg-gray-800 dark:bg-gray-700 text-white p-4 fixed w-full top-0 z-10 shadow-lg">
+        <div className="container mx-auto flex justify-between items-center">
+          <a href="#home" className="flex items-center space-x-2">
+            <img
+              src="https://res.cloudinary.com/df4nvgsgz/image/upload/v1757863732/logo_xugvbl.png" // Replace with your logo URL
+              alt="Harshad Shinde Logo"
+              className="logo-img w-10 h-10 rounded-full"
+            />
+            <h1 className="text-xl font-bold">Harshad Shinde</h1>
+          </a>
+          <ul className="flex space-x-6 items-center">
+            <li><a href="#home" className="hover:text-blue-300 transition font-medium">Home</a></li>
+            <li><a href="#about" className="hover:text-blue-300 transition font-medium">About</a></li>
+            <li><a href="#skills" className="hover:text-blue-300 transition font-medium">Skills</a></li>
+            <li><a href="#projects" className="hover:text-blue-300 transition font-medium">Projects</a></li>
+            <li><a href="#contact" className="hover:text-blue-300 transition font-medium">Contact</a></li>
+            <li>
+              <button
+                onClick={toggleDarkMode}
+                className="bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded-full font-medium hover:bg-blue-600 dark:hover:bg-blue-700 transition"
+                aria-label="Toggle dark mode"
+              >
+                {darkMode ? 'Light' : 'Dark'} Mode
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    );
+
+    // Hero Section with Profile Photo
+    const Hero = () => (
+      <section id="home" className="min-h-screen bg-gradient-to-r from-blue-600 to-purple-700 dark:from-gray-800 dark:to-gray-600 flex items-center justify-center text-white">
+        <div className="text-center animate-slide-up">
+          <img
+            src="https://res.cloudinary.com/df4nvgsgz/image/upload/v1759827957/cropped-profile1_zuk6nk.png" // Replace with your profile photo URL
+            alt="Harshad Nana Shinde Profile"
+            className="profile-img w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-6 shadow-xl border-4 border-white dark:border-gray-700"
+          />
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">Hi, I'm Harshad Shinde</h1>
+          <p className="text-xl md:text-2xl mb-6">Software Developer | Java Full Stack | AI & Data Science Enthusiast</p>
+          <div className="space-x-4">
+            <a href="#contact" className="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-blue-100 transition shadow-md">
+              Get in Touch
+            </a>
+            <a href="https://collection.cloudinary.com/df4nvgsgz/b1fcc5b6102d06e832bd464563b6285b" download className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition shadow-md">
+              View Resume
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+
+    // About Section
+    const About = () => (
+      <section id="about" className="py-20 bg-gray-100 dark:bg-gray-800 bg-pattern">
+        <div className="container mx-auto px-4 animate-slide-up">
+          <h2 className="text-4xl font-bold text-center mb-8 text-blue-600 dark:text-blue-400">About Me</h2>
+          <div className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto space-y-4">
+            <p>
+              Hi, I’m <span className="font-semibold">Harshad Nana Shinde</span>, a passionate
+              B.E. Artificial Intelligence & Data Science (2025) student with a strong interest
+              in <span className="font-semibold">software development, machine learning,</span> and
+              <span className="font-semibold"> full-stack development</span>.
+            </p>
+            <p>
+              I enjoy solving complex problems using <span className="font-semibold">Java, Python, C, and C++</span>,
+              and I’ve built projects ranging from an AI-powered disease prediction assistant
+              to a full-stack e-commerce platform. My experience spans across
+              <span className="font-semibold"> Spring Boot, REST APIs, React, Android Development,</span> and
+              <span className="font-semibold"> MySQL</span>, giving me a strong foundation in both backend and frontend technologies.
+            </p>
+            <p>
+              Beyond academics, I’ve published research papers in reputed journals, secured a
+              <span className="font-semibold">Government of India copyright</span>
+              for my AI healthcare project, and gained hands-on experience through internships
+              in <span className="font-semibold">Java Full Stack Development</span> and
+              <span className="font-semibold"> Data Science</span>.
+            </p>
+            <p>
+              I thrive in collaborative environments, value teamwork, and love taking on challenges
+              that help me grow as a developer. When I’m not coding, you’ll find me exploring new
+              tech trends, playing cricket, swimming, or cooking.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Skills Section
+    const Skills = () => {
+      const skills = [
+        'Java', 'C', 'C++', 'Python (Beginner)', 'JavaScript (Beginner)', 'Spring', 'Spring Boot',
+        'Spring Security', 'Hibernate', 'JPA', 'HTML5', 'CSS3', 'Bootstrap', 'React (Beginner)',
+        'MySQL', 'PostgreSQL', 'Git', 'GitHub', 'RESTful APIs'
+      ];
+      return (
+        <section id="skills" className="py-20 bg-white dark:bg-gray-900">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-8 text-blue-600 dark:text-blue-400">Skills</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="skill-tag bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-700 dark:to-purple-800 text-white p-4 rounded-lg text-center shadow-md hover:scale-105 transition transform"
+                >
+                  {skill}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Projects Section
+    const Projects = () => {
+      const projects = [
+        {
+          name: 'AI Assistant Doctor',
+          description: 'Built ML models to predict diseases from user symptoms with treatment recommendations, integrated an Android app with Flask backend via REST APIs, and applied NLP techniques for accurate symptom query understanding.',
+          link: 'https://github.com/Harshads2405/BE_Project.git',
+          img: 'https://res.cloudinary.com/df4nvgsgz/image/upload/v1759829908/Ai_doctor_bniocq.jpg' // Replace with your project image
+        },
+        {
+          name: 'Library Management System',
+          description: 'Implemented book management system with authentication, borrowing/returning, and admin dashboard, designed using MVC architecture for modularity and maintainability.',
+          link: 'https://github.com/Harshads2405/Library-Management-System.git',
+          img: 'https://res.cloudinary.com/df4nvgsgz/image/upload/v1759830347/library_man_ahrzun.jpg'
+        },
+        {
+          name: 'Online Feedback System',
+          description: 'Built a feedback platform with secure login and submission, and added an analytics dashboard to track trends.',
+          link: 'https://github.com/Harshads2405/Feedback_System.git',
+          img: 'https://res.cloudinary.com/df4nvgsgz/image/upload/v1759830347/feedback_o75g09.jpg'
+        },
+        {
+          name: 'Employee Leave Application System',
+          description: 'Developed a role-based leave management portal with features for request, approval, and tracking.',
+          link: '#',
+          img: 'https://res.cloudinary.com/df4nvgsgz/image/upload/v1759830592/emp_lev_pylieg.jpg'
+        },
+        {
+          name: 'Full Stack E-Commerce Website',
+          description: 'Developed a full-stack e-commerce platform with catalog, cart, secure checkout, authentication, role-based access, order management, and a responsive front-end using React components.',
+          link: 'https://github.com/Harshads2405/E-commerce-Frontend.git',
+          img: 'https://res.cloudinary.com/df4nvgsgz/image/upload/v1759830485/E_comm_bkn8aa.jpg'
+        }
+      ];
+      return (
+        <section id="projects" className="py-20 bg-gray-100 dark:bg-gray-800 bg-pattern">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-8 text-blue-600 dark:text-blue-400">Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 animate-slide-up"
+                >
+                  <img src={project.img} alt={project.name} className="w-full h-40 object-cover rounded-lg mb-4" />
+                  <h3 className="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">{project.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                  <a href={project.link} className="text-blue-500 dark:text-blue-400 hover:underline font-medium">View Project</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Contact Section
+    const Contact = () => {
+      const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+      };
+
+      return (
+        <section id="contact" className="py-20 bg-white dark:bg-gray-900 bg-pattern">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-8 text-blue-600 dark:text-blue-400">Contact Me</h2>
+            <form action="https://formspree.io/f/xkgvanry" method="POST" className="max-w-lg mx-auto">
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium" htmlFor="name">Name</label>
+                <input
+                  className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 transition"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium" htmlFor="email">Email</label>
+                <input
+                  className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 transition"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium" htmlFor="message">Message</label>
+                <textarea
+                  className="w-full p-3 border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 transition"
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-600 hover:to-purple-700 transition shadow-md"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </section>
+      );
+    };
+
+    // Footer Component with Logo
+    const Footer = () => (
+      <footer className="bg-gray-800 dark:bg-gray-700 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <div className="mb-4">
+            <img
+              src="https://res.cloudinary.com/df4nvgsgz/image/upload/v1759827957/cropped-profile1_zuk6nk.png" // Replace with your logo URL
+              alt="Harshad Shinde Logo"
+              className="logo-img w-12 h-12 rounded-full mx-auto mb-2"
+            />
+            <p className="text-lg font-semibold">Harshad Nana Shinde</p>
+          </div>
+          <p>&copy; 2025 Harshad Nana Shinde. All rights reserved.</p>
+          <div className="flex justify-center space-x-6 mt-4">
+            <a href="https://www.linkedin.com/in/hshinde2405" className="hover:text-blue-300 transition font-medium">LinkedIn</a>
+            <a href="https://github.com/Harshads2405" className="hover:text-blue-300 transition font-medium">GitHub</a>
+            <a href="https://www.instagram.com/harshadshinde2405?igsh=MTBvaHFoMWtieDhkZw==" className="hover:text-blue-300 transition font-medium">Instagram</a>
+          </div>
+        </div>
+      </footer>
+    );
+
+    // Render the App
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
